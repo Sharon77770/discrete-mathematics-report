@@ -8,7 +8,10 @@ def get_mat(n: int) -> List[List[float]]:
     mat = []
     for _ in range(n):
         row = list(map(float, input().split()))
+        if len(row) != n: raise Exception(f"{n}*{n}이 아님")
         mat.append(row)
+
+    if len(mat) != n: raise Exception(f"{n}*{n}이 아님")
     return mat
 
 
@@ -112,7 +115,15 @@ def main():
     n = int(input("행렬 크기 입력: "))
 
     print(f"{n}x{n} 행렬의 행:")
-    A = get_mat(n)
+
+    while True:
+        try:
+            A = get_mat(n)
+            break
+        except Exception as e:
+            print("오류:", e)
+            print("재입력")
+            continue
 
     print("\n입력 행렬:")
     show_mat(A)
